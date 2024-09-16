@@ -24,8 +24,8 @@ estadoMiembro boolean
 
 CREATE TABLE Prestamo(
 codigoPrestamo int AUTO_INCREMENT primary key ,
-fechaPrestamo date not null,
-fechaDevolucion date,
+fechaPrestamo datetime not null,
+fechaDevolucion datetime,
 idLibroFK varchar(20) not null,
 idMiembroFK varchar(20) not null,
 estadoPrestamo boolean
