@@ -15,7 +15,7 @@ fechaNacimiento date
 );
 
 CREATE TABLE Miembro(
-identificacionMiembro int AUTO_INCREMENT primary key ,
+identificacionMiembro varchar(20) primary key ,
 nombreMiembro varchar(20) not null,
 direccionMiembro varchar(50),
 fechaInscripcion date not null,
