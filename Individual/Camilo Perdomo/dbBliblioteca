@@ -1,0 +1,54 @@
+create database dbBiblioteca;
+use dbBiblioteca;
+
+create table Libro(
+idLibro varchar(20) primary key,
+tituloLibro varchar(50) not null,
+identificacionAutorFK varchar(50),
+anioPublicacion year not null,
+estadoLibro bool not null
+);
+
+create table Autor(
+identificacionAutor varchar(50) primary key,
+nombreAutor varchar(50) not null,
+fechaNacimiento date
+);
+
+create table Miembro(
+identificacionMiembro int auto_increment primary key,
+nombreMiembro varchar(50) not null,
+direccionMiembro varchar(50),
+fechaInscripcion date not null,
+estadomiembro bool not null
+);
+
+create table Prestamo(
+codPrestamo int auto_increment primary key,
+fechaPrestamo date not null,
+fechaDevolucion date,
+idLibroFK varchar(20) not null,
+idMiembroFK int not null,
+estadoPrestamo bool not null
+);
+
+alter table Autor
+change fechaNacimiento fechanacimientoAutor date;
+
+alter table Prestamo
+modify fechaDevolucion datetime;
+
+alter table Libro
+add constraint FKautorLibro
+foreign key (identificacionAutorFK)
+references Autor(identificacionAutor);
+
+alter table Prestamo
+add constraint FKidLibro
+foreign key (idLibroFK)
+references Libro(idLibro);
+
+alter table Prestamo
+add constraint FKidentificacionMiembro
+foreign key (idMiembroFK)
+references Miembro(identificacionMiembro);
