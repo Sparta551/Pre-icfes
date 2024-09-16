@@ -1,0 +1,63 @@
+create database BDmascotas;
+use BDmascotas;
+/*crear las tablas*/
+/*4 punto*/
+create table Producto(
+codigoProducto int(11) primary key,
+nombreProducto varchar(15) ,
+marca varchar(15),
+precio float,
+cantidad int(11) not null,
+cedulaClienteFK int(11)
+);
+create table Cliente(
+cedulaCliente int(11) primary key,
+nombreCliente varchar(15) ,
+direccionCliente varchar(15),
+telefono int(10),
+idMascotaFK int(11)
+);
+create table Mascota(
+idMascota int(11) primary key,
+nombreMascota varchar(15) ,
+generoMascota varchar(15),
+razaMascota varchar(15),
+cantidad int(10)
+);
+create table mascota_vacuna(
+idMascotaFK int(11),
+codigoVacunaFK int(11),
+enfermedad varchar(15)
+);
+create table Vacuna(
+codigoVacuna int(11) primary key,
+nombreVacuna varchar(15) ,
+dosisVacnua int(10),
+enfermedad varchar(15)
+);
+/*5*/
+alter table Mascota
+change cantidad cantidadMascota int(10);
+/*6*/
+alter table mascota_vacuna
+rename detalleVacuna;
+
+alter table Producto
+add constraint idcedulacliente
+foreign key (cedulaClienteFK)
+references Cliente(cedulaCliente);
+
+alter table Cliente
+add constraint mascota
+foreign key (idMascotaFK)
+references Mascota(idMascota);
+
+alter table mascota_vacuna
+add constraint vacunasm
+foreign key (codigoVacunaFK)
+references Vacuna(codigoVacuna);
+
+alter table mascota_vacuna
+add constraint vacunasm
+foreign key (idMascotaFK)
+references Mascota(idMascota);
