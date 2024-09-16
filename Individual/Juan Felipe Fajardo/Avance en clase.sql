@@ -26,8 +26,8 @@ CREATE TABLE Prestamo(
 codigoPrestamo int AUTO_INCREMENT primary key ,
 fechaPrestamo date not null,
 fechaDevolucion date,
-idLibroFK varchar(20),
-idMiembroFK varchar(20),
+idLibroFK varchar(20) not null,
+idMiembroFK varchar(20) not null,
 estadoPrestamo boolean
 );
 
