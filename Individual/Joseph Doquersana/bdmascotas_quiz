@@ -58,6 +58,6 @@ foreign key (codigoVacunaFK)
 references Vacuna(codigoVacuna);
 
 alter table mascota_vacuna
-add constraint vacunasm
+add constraint mascota
 foreign key (idMascotaFK)
 references Mascota(idMascota);
