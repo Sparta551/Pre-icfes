@@ -1,4 +1,3 @@
-/* Clase Lunes 16 Septiembre*/
 
 /*
 punto 1
@@ -83,7 +82,6 @@ punto 6
 alter table Mascota_Vacuna 
 rename detalleVacuna;
 
-/* Clase 18 de Septiembre*/
 
 select * from Mascota;
 describe Mascota;
@@ -91,18 +89,44 @@ Insert into Mascota values(1, 'roco', 'M', 'Pug', 1);
 Insert into Mascota values(2, 'pb', 'F', 'si', 1),(3, ':o', ':)', 'jeje', 1);
 Insert into Mascota values(4, '', '', '', '');
 
+select nombreMascota, razaMascota from Mascota;
+select nombreMascota as 'nombreM', razaMascota as 'raza' from mascota;
+
 select * from Cliente;
 describe Cliente;
 Insert into Cliente values(1021512275, 'Camilo', 'Perdomo', '', 3173669726, 1), (79745951, 'Harold', 'Perdomo', '', '', 2);
+
+select ceddulaCliente as 'documento', direccionCliente as 'direccion' from producto;
 
 select * from Vacuna;
 describe Vacuna;
 insert into Vacuna values(1, 'Advil', 500, 'gripe'),(2, 'margit', 300, 'rabia');
 
+select nombreVacuna as 'nombreV', dosisVacuna as 'dosis' from Vacuna;
+
 select * from Producto;
 describe Producto;
 insert into Producto values('', 'shampoo', 'sedal', 35000, 1021512275, 25), ('', 'prod', 'pajarito', 2000, 79745951, 3), ('', 'galleta', 'proplan', 2000, 1021512275, 38);
 
+select codigoProducto as 'codigo', nombreProducto as 'producto' from Producto;
+
 select * from detalleVacuna;
 describe detalleVacuna;
 insert into detalleVacuna values(1, 3,'gripe'),(2, 4,'rabia');
+
+select cedulaCliente as 'documento', idMascotaFK as 'codigo mascota' from Cliente order by nombreCliente asc;
+
+select nombreProducto, marca from Producto order by precio desc;
+
+select nombreProducto from producto where precio > 1000;
+
+select enfermedad from detalleVacuna where  codigoVacunaFK > 1;
+
+select idMascota from Mascota where nombreMascota = 'roco' AND razaMascota = 'pug';
+select razaMascota from Mascota where idMascota > 3;
+
+select nombreCliente, apellidoCliente from Cliente where cedulaCliente <= 1000000000;
+select nombreCliente, apellidoCliente from Cliente where telefono = 0;
+
+select codVacuna from Vacuna where enfermedad = 'gripa' AND dosisVacuna <= 500;
+select nombreVacuna from Vacuna where dosis > 100 OR enfermedad = 'rabia';
