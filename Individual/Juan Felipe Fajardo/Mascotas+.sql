@@ -93,3 +93,8 @@ insert into Cliente values (1234,'josh','kakaka','Peru',0000,1),(111111,'maurici
 insert into producto values (0,'shampoo','heat ant sholdeas', 10500, 111111,1),(1,'penisilina','MyHuevos', 500,111111,9);
 
 insert into detalleVacuna values (1,2,'mira y no me mira'),(2,1,'que es lo que significa?');
+
+select cedulaCliente as 'Documento', direccionCliente 'Direccion' from Cliente;
+select nombreProducto as 'Nombre', precio 'Valor' from Producto;
+select nombreMascota as 'Nombre', razaMascota 'Raza' from Mascota;
+select nombreVacuna as 'Vacuna', dosisVacuna'Dosis', enfermedad from Vacuna;
