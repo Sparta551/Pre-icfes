@@ -32,7 +32,7 @@ enfermedad varchar(15) not null
 create table Vacuna(
 codigoVacuna int(11) primary key,
 nombreVacuna varchar(15) not null,
-dosisVacnua int(10) not null ,
+dosisVacnua varchar(10) not null ,
 enfermedad varchar(15) not null 
 );
 
@@ -74,6 +74,28 @@ describe Producto;
 describe Vacuna;
 describe Cliente;
 describe detallevacuna;
+/*consulta puntual de ciertas caracteristicas de la tabla */
+select nombreMascota,razaMascota from Mascota;
+/*consulta con asignacion oara nobre de alguyn atributo*/
+select cedulaCliente as 'Documento' , direccionCliente as 'Direccion' from Cliente;
+select nombreProducto as 'Producto', cantidad as 'Disponibles' from Producto;
+select nombreVacuna as 'Vacuna', dosisVacnua as 'Dosis' from Vacuna;
+select nombreMascota as 'Nombre De La Mascota', razaMascota as 'Raza' from Mascota;
+/*seleccionar un campo para odernarlo ya sea de ascendente(asc) o decensndente(desc) */
+select cedulaCliente as 'Documento' , idMascotaFK as 'Codigo Mascota' from cliente order by nombreCliente asc;
+select nombreProducto as 'Producto' , marca from Producto order by precio asc;
+/*consultas con valores numericos o relacionados con where*/
+select nombreProducto, precio from Producto where precio<=10000;
+select enfermedad from detallevacuna where codigoVacunaFK=10;
+select nombreProducto, precio from Producto where precio<=10000 or codigoProducto<2;
+/*ejercicios clases */
+select idMascota, razaMascota from Mascota where idMascota<=2 and razaMascota='Criollo';
+select codigoVacuna, dosisVacnua from Vacuna where codigoVacuna<10 or dosisVacnua<=1;
+select cedulaCliente, nombreCliente from Cliente where nombreCliente='jose alberto' and cedulacliente<=1600000 ;
+/*consultas con rangos numeros o nombre */
+select cedulaCliente from Cliente where Cedulacliente between 1 and 1600000;
+select nombreProducto from Producto where marca like '%a%'; 
+/*tarea hacer dos buquedas con like y not like con nuestra tabla mascota*/
 /*insertar o ingresar datos segun la estructura de la tabla */
 insert into Mascota value(1,'Felix','M','Criollo',1);
 insert into Mascota value(2,'Mia','F','Criollo',1);
