@@ -97,7 +97,9 @@ select cedulaCliente from Cliente where Cedulacliente between 1 and 1600000;
 select nombreProducto from Producto where marca like '%a%'; 
 /*tarea hacer dos buquedas con like y not like con nuestra tabla mascota*/
 select nombreMascota from Mascota where like 'f%';
-select nombreMascota from Mascota where not like '%e%';
+select nombreMascot from Mascota where not like '%e%';
+select generoMascota from Mascota where like 'M%';
+select razaMascota from Mascota where not like '%u%';
 /*insertar o ingresar datos segun la estructura de la tabla */
 insert into Mascota value(1,'Felix','M','Criollo',1);
 insert into Mascota value(2,'Mia','F','Criollo',1);
