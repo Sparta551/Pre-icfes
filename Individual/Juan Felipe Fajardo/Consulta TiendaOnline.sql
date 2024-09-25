@@ -14,3 +14,22 @@ select ventaFK as 'codigo de venta' from venta_producto where (total/cantidadPro
 
 select sum(Total) from venta_producto;
 select min(Total) from venta_producto;
+
+select *
+from clientes c right join ventas v left join venta_producto vp on v.codigoVenta=vp.ventaFK on v.clienteFK=c.codigoCliente;
+
+select nombreCliente, total
+from ventas v 
+inner join clientes c on c.codigoCliente=v.clienteFK
+inner join venta_producto vp on vp.ventaFK=v.codigoVenta;
+
+select c.*,max(vp.total)
+from clientes c right join ventas v left join venta_producto vp on v.codigoVenta=vp.ventaFK on v.clienteFK=c.codigoCliente;
+
+select * from ventas v inner join clientes c on c.codigoCliente=v.clienteFK;
+select * from ventas v left join clientes c on c.codigoCliente=v.clienteFK;
+
+#consultar el cliente con mayor venta
+#consultar usuario y cliente de una venta especifica
+#consultar los productos que compro un cliente especifico
+#consultar todos los clientes que han hecho ventas
