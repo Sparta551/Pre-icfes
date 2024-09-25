@@ -58,18 +58,48 @@ foreign key (idProductoFk)
 references Producto(idProducto);
 
 describe Producto;
+
 describe Usuario;
+
 describe Clientes;
+
 describe Ventas;
+
 describe detallesVentas;
+
 insert into Producto value('',1,'pollo',10500,16),('',2,'sal',2600,50),('',3,'azucar',3600,25),('',4,'calzones',16000,43);
+
 insert into Usuario value('','empleado','felipe castillo',8478497710,'6261 Cornell Station Apt. 975'),('','empleado','Rocio Moral Hijo',2593633313,'Carretera Delvalle, Nro 0'),('','comprador','العنود الحصين',3205426185,'54542 شارع هند الزامل'),('','comprador','Mabel Cummerata',5209184378,'3155 Pouros Grove Apt. 746');
-insert into Cliente value('','jose alexander',60154036615,'may-19-2000'),('','maria estefania',079809578022,'ene-01-1983'),('','Lulut Ajiman Prasasta S.IP',1481260,'dic-24-20003');
-insert into Ventas value(4,'','','','');
-insert into detallesVentas value(4,'','','','');
 
+insert into Cliente value('','jose alexander',60154036615,'may-19-2000'),('','maria estefania',079809578022,'ene-01-1983'),('','Lulut Ajiman Prasasta S.IP',1481260,'dic-24-2003'),('','Gbeminiyi Iyalla',08108206337,'jul-23-1989');
 
+insert into Ventas value('','mar-20-2020',15000,'',''),('','jun-01-2015',60000,'',''),('','ene-19-2010',30000,'',''),('','may-09-2022',19000,'','');
 
+insert into detallesVentas value('','',9,13),('','',25,6),('','',15,23),('','',36,19);
+
+select * from Producto;
+
+select precioProducto as 'precio', nombre from Producto order by precio asc;
+
+select nacimientoCliente from Cliente where nacimientoCliente like 'ene%';
+
+select rolUruario from Usuario where rolUruario='empleado';
+
+select fecha from Ventas where fecha='mar' and fecha='abr' and fecha='may' and fecha='jun';
+
+select nombre  from Producto where nombre like '%r%';
+
+select totalVentas from Ventas where totalVentas=15000 or totalVentas=30000;
+
+select avg(cantidadVentas) from detallesVentas;
+
+select count(cantidadVentas) from detallesVentas;
+
+select count(cantidadVentas) from detallesVentas;
+
+select count(idCLiente) as 'cantidad de clientes' from Cliente;
+
+select min(totalVentas) as 'venta mas economica' from Ventas;
 
 /*crear una base de datos llamada tienda online 
 2 habilitar la bd
