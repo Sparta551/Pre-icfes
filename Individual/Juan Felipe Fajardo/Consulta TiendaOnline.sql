@@ -5,7 +5,7 @@ select * from Ventas;
 select * from Usuario;
 select * from Clientes;
 
-select nombreProducto as 'Producto' from producto order by precio asc;
+select nombreProducto as 'Producto', precio from producto order by precio asc;
 select nombreCliente as 'Nombre', cedulaCliente 'Cedula' from clientes where month(nacimientoCliente) = 01;
 select * from usuario where rol='Empleado';
 select usuarioFK as 'Vendedor', fechaVenta 'Fecha' from ventas where month(fechaVenta) = 03 or month(fechaVenta) = 06;
