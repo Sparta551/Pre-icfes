@@ -60,11 +60,11 @@ references Venta(idVenta);
 
 select * from Usuario;
 describe Usuario;
-Insert into Usuario values('', 'Alejandro', 'Molina', 'vendedor'),('', 'catalina', 'ayala', 'Vendedor'),('', 'Daniela', 'Acosta', 'Administrador'),('', 'Thomas', 'Torres', 'Desarrollador');
+Insert into Usuario values('', 'Alejandro', 'Molina', 'Empleado'),('', 'catalina', 'ayala', 'Empleado'),('', 'Daniela', 'Acosta', 'Administrador'),('', 'Thomas', 'Torres', 'Desarrollador');
 
 select * from Cliente;
 describe Cliente;
-Insert into Cliente values(79745951, 'Harold', 'Puentes', 1976-11-30),(1021512275, 'Andres', 'Bermudez', 2004-04-28),(52589557, 'Diana', 'Esperanza', 1975-02-02),(1015689572, 'Martin', 'Lucero', 1999-01-31);
+Insert into Cliente values(79745951, 'Harold', 'Puentes', '1976-11-30'),(1021512275, 'Andres', 'Bermudez', '2004-4-28'),(52589557, 'Diana', 'Esperanza', '1975-2-02'),(1015689572, 'Martin', 'Lucero', '1999-1-31');
 
 select * from Producto;
 describe Producto;
@@ -72,16 +72,18 @@ Insert into Producto values('', 123456789, 'juguito tomsi', 2500),('', 987654321
 
 select * from Venta;
 describe Venta;
-Insert into Venta values('', 1, 2024-01-31, 79745951, 1),('', 2, 2024-05-15, 79745951, 1),('', 3, 2023-11-25, 52589557, 2),('', 4, 2024-08-15, 1021512275, 1);
+Insert into Venta values('', 1, '2024-01-31', 79745951, 1),('', 2, '2024-05-15', 79745951, 1),('', 3, '2023-11-25', 52589557, 2),('', 4, '2024-08-15', 1021512275, 1);
 
 select * from Venta_Producto;
 describe Venta_Producto;
-Insert into Venta_producto values(1, 5, 12),(3, 7, 2),(4, 7, 1),(2, 6, 2);
+Insert into Venta_producto values(1, 1, 12),(3, 3, 2),(4, 3, 1),(2, 2, 2);
 
 describe Cliente;
 
 select * from Producto;
 select nombreProducto codigoBarras from Producto order by precioProduct asc;
-select cedulaCliente as identificacion, nombreCliente as nombre, apellidoCliente as apellido from Cliente where fechaNacimiento like 
-
-
+select cedulaCliente as identificacion, nombreCliente as nombre, apellidoCliente as apellido from Cliente where month(fechaNacimiento) = 1;
+select nombreUsuario as nombre, apellidoUsuario as apellido from Usuario where rolUsuario = 'Empleado';
+select idVenta, idClienteFK as cliente from Venta where month(fechaVenta) between 3 and 6;
+select codigoBarras as codigo, nombreProducto as Producto from Producto where nombreProducto like '%r%';
+select idVenta, idClienteFK, codigoBarras from Venta, Producto where precioProduct = 15000 or precioProduct = 30000;
