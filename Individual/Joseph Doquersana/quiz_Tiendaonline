@@ -107,8 +107,16 @@ select * from Ventas inner join Clientes on Ventas.idClienteFK = Clientes.idClie
 select V.*,C.idCliente from Ventas V inner join CLientes C  on V.idClienteFK = C.idCliente ;
 
 select Ventas.idClienteFk ,CLientes.nombreCliente ,detallesVentas.totalProducto, max(totalProducto) from Ventas  inner join Clientes  on Ventas.idClienteFK = CLientes.idCliente 
-inner join detallesVentas on Ventas.idVenta = detallesVentas.idVentaFK
+inner join detallesVentas on Ventas.idVenta = detallesVentas.idVentaFK;
 
+select Ventas.productosV ,Clientes.idCliente , Usuarios.idUsuario from Ventas inner join Clientes on Ventas.idClienteFK = Clientes.idCliente
+inner join Usuarios on Ventas.idUsuarioFK = Usuarios.idUsuario
+where productosV like '%pollo%';
+
+select Ventas.productosV ,Clientes.idCLiente from Ventas inner join Clientes on Ventas Ventas.idClienteFK = Clientes.idCliente
+where Ventas.idClienteFK=1;
+
+select Clientes.idCliente, Clientes.nombreCliente from Clientes inner join Ventas on Clientes.idCliente = Ventas.idClienteFK;
 
 /*crear una base de datos llamada tienda online 
 2 habilitar la bd
