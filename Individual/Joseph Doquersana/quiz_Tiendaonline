@@ -57,6 +57,9 @@ alter table detallesVentas
 add constraint idProducto
 foreign key (idProductoFk)
 references Producto(idProducto);
+ 
+ alter table Ventas 
+ add numeroV varchar (50) not null;
 
 describe Producto;
 
@@ -70,13 +73,23 @@ describe detallesVentas;
 
 insert into Producto value('',1968,'pollo',10500,16),('',15584,'sal',2600,50),('',198532,'azucar',1000,25),('',48685,'calzones',14000,43);
 
+insert into Producto value('',1222,'pañales',5500,30),('',1623,'zapatos para bebe',15300,10);
+
 insert into Usuario value('','empleado','felipe castillo',8478497710,'6261 Cornell Station Apt. 975'),('','empleado','Rocio Moral Hijo',2593633313,'Carretera Delvalle, Nro 0'),('','comprador','العنود الحصين',3205426185,'54542 شارع هند الزامل'),('','comprador','Mabel Cummerata',5209184378,'3155 Pouros Grove Apt. 746');
+
+insert into Usuario value('','empleado','joseph doqueresana',3209680055,'call 53 sur 81 i 31 ');
 
 insert into Clientes value('','jose alexander',60154036615,'may-19-2000'),('','maria estefania',079809578022,'ene-01-1983'),('','Lulut Ajiman Prasasta S.IP',1481260,'dic-24-2003'),('','Gbeminiyi Iyalla',08108206337,'jul-23-1989');
 
-insert into Ventas value('','mar-20-2020',15000,'sal,asucar',1,1),('','jun-01-2015',60000,'pollo',2,2),('','ene-19-2010',30000,'calzones,azucar',3,3),('','may-09-2022',19000,'calsones,sal',4,4);
+insert into Clientes value('','tatiana cabrera',60154036618,'mar-16-1982');
+
+insert into Ventas value('','mar-20-2020',15000,'sal,asucar',1,1,'2020 03 20'),('','jun-01-2015',60000,'pollo',2,2,'2015 07 01'),('','ene-19-2010',30000,'calzones,azucar',3,3,'2010 01 19'),('','may-09-2022',19000,'calsones,sal',4,4,'2022 02 09');
+
+insert into Ventas value('','feb-20-2020',51400,'pañales,zapatos para bebe',5,5,'2020 02 20');
 
 insert into detallesVentas value('',1,1,15000,13),('',2,2,60000,36),('',3,3,30000,13),('',4,4,19000,19);
+
+insert into detallesventas value('',5,5,51400,13);
 
 select * from Producto;
 
@@ -109,15 +122,28 @@ select V.*,C.idCliente from Ventas V inner join CLientes C  on V.idClienteFK = C
 select Ventas.idClienteFk ,CLientes.nombreCliente ,detallesVentas.totalProducto, max(totalProducto) from Ventas  inner join Clientes  on Ventas.idClienteFK = CLientes.idCliente 
 inner join detallesVentas on Ventas.idVenta = detallesVentas.idVentaFK;
 
-select Ventas.productosV ,Clientes.idCliente , Usuarios.idUsuario from Ventas inner join Clientes on Ventas.idClienteFK = Clientes.idCliente
-inner join Usuarios on Ventas.idUsuarioFK = Usuarios.idUsuario
+select Ventas.productosV ,Clientes.idCliente , Usuario.idUsuario from Ventas inner join Clientes on Ventas.idClienteFK = Clientes.idCliente
+inner join Usuario on Ventas.idUsuarioFK = Usuario.idUsuario
 where productosV like '%pollo%';
 
-select Ventas.productosV ,Clientes.idCLiente from Ventas inner join Clientes on Ventas Ventas.idClienteFK = Clientes.idCliente
+select Ventas.productosV ,Clientes.idCLiente from Ventas inner join Clientes on Ventas.idClienteFK = Clientes.idCliente
 where Ventas.idClienteFK=1;
 
 select Clientes.idCliente, Clientes.nombreCliente from Clientes inner join Ventas on Clientes.idCliente = Ventas.idClienteFK;
 
+update Clientes set nombreCliente='Tatiana Cabrera Vargas',nacimientoCliente='24/11/1985'  where idCliente=5; ;
+
+update Ventas set numeroV='2024 09 27'where idVenta=5 ;
+
+delete from Ventas where numeroV='2024 09 27';
+ 
+insert into Clientes value('55163118','Tatiana Cabrera Vargas',6041536698,'24/11/1985');
+update Ventas set idClienteFK='55163118' where idClienteFK=5;
+delete from Clientes where idCliente=5;
+
+select *from Ventas;
+select * from Usuario;
+select * from Clientes;
 /*crear una base de datos llamada tienda online 
 2 habilitar la bd
 3 crear tablas producto(id auto increment, codigo de barras  ) , usuario , clientes( id auto incement ) ,ventas(auto increment, numero de ventas ) 
