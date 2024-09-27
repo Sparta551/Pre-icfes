@@ -21,7 +21,7 @@ from clientes c right join ventas v left join venta_producto vp on v.codigoVenta
 select nombreCliente, total
 from ventas v 
 inner join clientes c on c.codigoCliente=v.clienteFK
-inner join venta_producto vp on vp.ventaFK=v.codigoVenta;
+inner join venta_producto vp on vp.ventaFK=v.codigoVenta order by vp.total desc;
 
 select c.*,max(vp.total)
 from clientes c right join ventas v left join venta_producto vp on v.codigoVenta=vp.ventaFK on v.clienteFK=c.codigoCliente;
@@ -33,3 +33,8 @@ select * from ventas v left join clientes c on c.codigoCliente=v.clienteFK;
 #consultar usuario y cliente de una venta especifica
 #consultar los productos que compro un cliente especifico
 #consultar todos los clientes que han hecho ventas
+
+select nombreCliente, total
+from ventas v 
+inner join clientes c on c.codigoCliente=v.clienteFK
+inner join venta_producto vp on vp.ventaFK=v.codigoVenta where (select max(total) from venta_producto)=vp.total;
