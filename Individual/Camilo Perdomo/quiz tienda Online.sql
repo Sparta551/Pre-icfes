@@ -121,7 +121,7 @@ where Ventas.idClienteFK=1;
 
 select Clientes.idCliente, Clientes.nombreCliente from Clientes inner join Ventas on Clientes.idCliente = Ventas.idClienteFK;
 
-describe detallesventas;
+describe producto;
 select * from ventas;
 select * from Clientes;
 select * from detallesventas;
@@ -137,3 +137,41 @@ update clientes set idCliente = 55163118 where idCliente = 150284632;
 insert Clientes value (55163118, 'Tatiana Cabrera Vargas', 3144606918, '1985-11-24');
 update ventas set idClienteFK = 55163118 where idClienteFK = 150284632;
 delete from Clientes where idCliente = 150284632;
+
+/*
+DELIMITER//
+create procedure nombre_procedimiento (parametros):
+begin
+--logica de sentencia
+end//
+DELIMITER;
+*/
+
+DELIMITER //
+create procedure agregar_producto (idProducto int(11), codBarras int(11), nombreProducto varchar (100), precioProducto float, cantidadProducto int(11))
+begin
+
+insert Producto values(idProducto, codBarras, nombreProducto, precioProducto, cantidadProducto);
+
+end //
+DELIMITER ;
+
+call agregar_producto('',123, 'juguito tomsy', 2500, 26);
+
+create view nombre_vista as
+select * from clientes;
+
+select * from nombre_vista
+
+/*
+de tienda online, crear 3 procedimientos:
+
+inactivar un cliente
+consultar los productos que ha comprado un cliente
+modificar la fecha de nacimiento de un cliente
+
+y 2 vistas
+
+consulta, que cliente comopro un producto y cual fue su numero de orden
+el cliente que mas compras haya hecho
+*/
