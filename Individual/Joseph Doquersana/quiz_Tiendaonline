@@ -144,6 +144,44 @@ delete from Clientes where idCliente=5;
 select *from Ventas;
 select * from Usuario;
 select * from Clientes;
+describe Producto;
+DELIMITER //
+create procedure registrarProductos( idProducto int(11),codigoBacrras int(11),nombre varchar(50),precioProduto float,cantidadProducto int(11))
+begin 
+insert into producto value (idProducto,codigoBacrras,nombre,precioProduto,cantidadProducto);
+end//
+DELIMITER ;
+/* para elminar un procedimiento 
+drop procedure registrarProductos;
+*/
+call registrarProductos('',168598,'lechuga',5600,20);
+select * from Producto;
+DELIMITER //
+create procedure cambiarNombreProductos(id int(11),codigoBacrras int(11),nom varchar(50),precioProduto float,cantidadProducto int(11))
+begin 
+update Producto set nombre=nom where idProducto=id;
+end//
+DELIMITER ;
+call cambiarNombreProductos(7,168598,'piscina',5600,20);
+create view consultarCliente as 
+select * from CLientes;
+select * from consultarCliente;
+/*crear un prodecimiento para innactivar un cliente 
+otro para consultar los prodyuctos que a comprado un cliente 
+procedimiento para modificar la fecha de nacmiento cliente
+y crear dos vistas una que cliente compro un producto y su numero de orden 
+y otra vista que muestre el cliente que haya echo mas compras */
+/*procedimientos almacenados -subrutinas almacenar la inrformacion
+delimiter//
+create procedure nombre_procedimiento (parametros)
+begin
+--logica sentencia que se quiera utilizar 
+end//
+
+create procedure registrarProductos( idProducto,
+
+delimiter;
+*/
 /*crear una base de datos llamada tienda online 
 2 habilitar la bd
 3 crear tablas producto(id auto increment, codigo de barras  ) , usuario , clientes( id auto incement ) ,ventas(auto increment, numero de ventas ) 
