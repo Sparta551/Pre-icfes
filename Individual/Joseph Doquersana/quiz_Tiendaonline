@@ -87,9 +87,13 @@ insert into Ventas value('','mar-20-2020',15000,'sal,asucar',1,1,'2020 03 20'),(
 
 insert into Ventas value('','feb-20-2020',51400,'pañales,zapatos para bebe',5,5,'2020 02 20');
 
+insert into Ventas value('','jul-20-2010',34400,'sal,pollo',2,1,'2010 07 20');
+
 insert into detallesVentas value('',1,1,15000,13),('',2,2,60000,36),('',3,3,30000,13),('',4,4,19000,19);
 
 insert into detallesventas value('',5,5,51400,13);
+
+insert into detallesventas value('',2,1,34400,7);
 
 select * from Producto;
 
@@ -156,16 +160,47 @@ drop procedure registrarProductos;
 */
 call registrarProductos('',168598,'lechuga',5600,20);
 select * from Producto;
+
 DELIMITER //
+
 create procedure cambiarNombreProductos(id int(11),codigoBacrras int(11),nom varchar(50),precioProduto float,cantidadProducto int(11))
 begin 
 update Producto set nombre=nom where idProducto=id;
 end//
+
 DELIMITER ;
+
 call cambiarNombreProductos(7,168598,'piscina',5600,20);
 create view consultarCliente as 
 select * from CLientes;
+
 select * from consultarCliente;
+
+DELIMITER//
+
+create procedure verProductoCliente(idVenta int,fecha varchar(20),totalVentas varchar(50),producV varchar(50),idClienteFK int,idUsuarioFk int)
+begin 
+select productoV from Ventas where productosV=producV;
+end//
+
+create procedure cambiarFechaNacimiento(idCLien int,nombreCliente varchar(100),telefonoCliente varchar(20),nCliente varchar(20))
+begin 
+update Clientes set nacimientoCliente=nCliente where idCliente=idCLien;
+end//
+
+create procedure inactivarCliente(idCLient int,nombreC varchar(100),telefonoC varchar(20),nacimientoC varchar(20))
+begin 
+select Clientes set nombreCliente=nombreC and telefonoCliente=telefonoC  and nacimientoCliente=nacimientoC  where idCliente=idCLient;
+end//
+
+DELIMITER;
+
+create view consultarCliente as 
+select productosV and numeroV from Ventas ;
+
+create view clientesMasCompras as 
+select count(idCLienteFK)>1 as 'mas compras' from Ventas;
+
 /*crear un prodecimiento para innactivar un cliente 
 otro para consultar los prodyuctos que a comprado un cliente 
 procedimiento para modificar la fecha de nacmiento cliente
@@ -177,9 +212,6 @@ create procedure nombre_procedimiento (parametros)
 begin
 --logica sentencia que se quiera utilizar 
 end//
-
-create procedure registrarProductos( idProducto,
-
 delimiter;
 */
 /*crear una base de datos llamada tienda online 
