@@ -76,6 +76,7 @@ select apellido from consultarCliente;
 #procedimiento para modificar la fecha de nacimiento
 #crear vista que consulte que cliente compro un producto y su numero de orden
 #crear vista que muestre el cliente que mas compras haya hecho
+
 delimiter //
 create procedure eliminar_cliente (idCliente int)
 begin
@@ -87,7 +88,7 @@ begin
 select codigoCliente 'Id', nombreCLiente 'Nombre', productoFK 'Producto'
 from clientes c
 left join ventas v on c.codigoCliente=v.usuarioFK
-left join venta_producto vp on v.codigoVente=vp.ventaFK
+left join venta_producto vp on v.codigoVenta=vp.ventaFK
 where codigoCliente=idCLiente;
 end//
 
@@ -98,11 +99,45 @@ end//
 
 delimiter ;
 
-drop view consltarProductoCliente;
+call consultar_productos_cliente (3);
+
+drop view consltarProductoCliente2;
 create view consltarProductoCliente as
 select codigoCliente 'Id', nombreCLiente 'Nombre', productoFK 'Producto', ventaFK 'Numero de orden'
-from clientes
-right join ventas on clientes.codigoCliente=ventas.usuarioFK
-left join venta_producto on ventas.codigoVenta=venta_producto.ventaFK;
+from clientes c
+right join ventas v 
+right join venta_producto vp on v.codigoVenta=vp.ventaFK on c.codigoCliente=v.usuarioFK;
 
-select * from consltarProductoCliente;
+create view consltarProductoCliente2 as
+select * #codigoCliente 'Id', nombreCLiente 'Nombre', productoFK 'Producto', codigoVenta 'Numero de orden'
+from ventas
+inner join clientes on clientes.codigoCliente=ventas.usuarioFK
+inner join venta_producto on ventas.codigoVenta=venta_producto.ventaFK;
+
+select * from consltarProductoCliente2;
+
+/* subconsultas son consultas anidadas dentro de otra consulta 
+select campo2, campo3 from tablanegra
+where columna2=(select columna2x from otratabla where condicion);
+
+*/
+
+/*consultar los datos de los empleados y su sueldo promedio
+select idEmpleado, nombreEmpleado, salario, (select avg(salario) from empleado) as promedio
+from empleado;
+
+select idEmpleado, nombreEmpleado, idArea, nombreArea
+from empleado
+where idArea in (select id area from area where nombreEmpleado='Juan??';
+*/
+
+/*
+Calcular los productos que se vendan a un precio mayor del promedio de todos los productos
+
+Mostrar los clientes que el total de compra sea mayor al promedio de compras de la tienda
+
+Mostrar el promedio de precios de productos comprados por clientes
+*/
+
+select id, nombreEmpleado, salario
+from empleado;
