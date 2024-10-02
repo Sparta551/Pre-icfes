@@ -193,3 +193,36 @@ select productosV and numeroV from Ventas ;
 
 create view clientesMasCompras as 
 select count(idCLienteFK)>1 as 'mas compras' from Ventas;
+
+/*
+Subconsultas
+
+son connsultas anidadas dentro de otra consulta
+
+select campo1, campo2 from tabla1 where columna1=(select columna1 from otratabla where condicion); 
+
+
+*/ 
+
+/*
+consultar los datos de los empleados y su sueldo promedio
+
+select idEmpleado, nombreEmpleado, salario, from empleado where salario > (select avg(salario) from empleado);
+
+select idEmpleado, nombreEmpleado, idArea, nombreArea from empleado where idArea in (select idArea from area where nombreEmpleado='Juan')
+*/
+
+/*
+calcular los productos que se vendadn a un precio mayor del promedio de todos los productos
+
+mostrar los clientes que el total de compra sea mayor al promedio de compras de la tienda
+
+calcular el promedio de precios de productos comprados por clientes
+*/
+
+describe producto;
+describe Clientes;
+
+select idProducto, codigoBacrras, nombre from Producto where precioProduto > (select avg(precioProduto) from producto);
+
+select idcliente, nombrecliente, ( from empleado where idArea in (select idArea from area where nombreEmpleado='Juan')
