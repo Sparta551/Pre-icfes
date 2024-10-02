@@ -163,15 +163,33 @@ select * from clientes;
 
 select * from nombre_vista
 
-/*
-de tienda online, crear 3 procedimientos:
+DELIMITER //
 
-inactivar un cliente
-consultar los productos que ha comprado un cliente
-modificar la fecha de nacimiento de un cliente
+create procedure verProductoCliente(idVenta int,fecha varchar(20),totalVentas varchar(50),producV varchar(50),idClienteFK int,idUsuarioFk int)
+begin 
 
-y 2 vistas
+select productosV from Ventas where productosV=producV;
 
-consulta, que cliente comopro un producto y cual fue su numero de orden
-el cliente que mas compras haya hecho
-*/
+end //
+
+create procedure cambiarFechaNacimiento(idCLien int,nombreCliente varchar(100),telefonoCliente varchar(20),nCliente varchar(20))
+begin 
+
+update Clientes set nacimientoCliente=nCliente where idCliente=idCLien;
+
+end //
+
+create procedure inactivarCliente(idCLient int,nombreC varchar(100),telefonoC varchar(20),nacimientoC varchar(20))
+begin 
+
+update Clientes set nombreCliente=nombreC and telefonoCliente=telefonoC and nacimientoCliente=nacimientoC where idCliente=idCLient;
+
+end //
+
+DELIMITER ;
+
+create view consultarCliente as 
+select productosV and numeroV from Ventas ;
+
+create view clientesMasCompras as 
+select count(idCLienteFK)>1 as 'mas compras' from Ventas;
