@@ -176,30 +176,72 @@ select * from CLientes;
 
 select * from consultarCliente;
 
-DELIMITER//
-
+DELIMITER //
+/*cambiarlo a yn inver join*/
 create procedure verProductoCliente(idVenta int,fecha varchar(20),totalVentas varchar(50),producV varchar(50),idClienteFK int,idUsuarioFk int)
 begin 
 select productoV from Ventas where productosV=producV;
-end//
+end //
 
 create procedure cambiarFechaNacimiento(idCLien int,nombreCliente varchar(100),telefonoCliente varchar(20),nCliente varchar(20))
 begin 
 update Clientes set nacimientoCliente=nCliente where idCliente=idCLien;
-end//
+end //
 
 create procedure inactivarCliente(idCLient int,nombreC varchar(100),telefonoC varchar(20),nacimientoC varchar(20))
 begin 
-select Clientes set nombreCliente=nombreC and telefonoCliente=telefonoC  and nacimientoCliente=nacimientoC  where idCliente=idCLient;
-end//
+update Clientes set nombreCliente=nombreC and telefonoCliente=telefonoC  and nacimientoCliente=nacimientoC  where idCliente=idCLient;
+end //
 
-DELIMITER;
+DELIMITER ;
 
 create view consultarCliente as 
 select productosV and numeroV from Ventas ;
 
+describe Producto;
+
+select * from Producto;
 create view clientesMasCompras as 
 select count(idCLienteFK)>1 as 'mas compras' from Ventas;
+
+/*calcular los produsctos que se vendan a un precio mayor del promedio de todos los productos */
+select idProducto,nombre,precioProduto
+from Producto where precioProduto>(select avg(precioProduto)
+from Producto);
+
+select * from Ventas;
+describe Clientes;
+/*mostrar los clientes que compren el total de compra sea mayor al promedio de compras de la tienda*/
+select idClienteFK,idVenta,totalVentas
+from Ventas
+where idVenta in (select idClienteFK from Clientes where totalventas>(select avg(totalventas)));
+select avg(totalventas) from Ventas;
+/*calcular el promedio de precios de producto comprados por clientes */
+select idEmpleado,nombreEmpleado,salario
+from empleado where salario>(select avg(salario)
+from empleado);
+
+/*sub consultas 
+son consultas que se hacen para una consulta mas grande 
+select campo2 , campo3 from tablanegra 
+where columna2 =(select columna2x from otratabal where condicion);
+*/
+/*
+consultar los datos de los empleados y s sueldo promedio 
+select idEmpleado, nombreEmpleado, salario,(select avg(salario)
+from empleado )as promedio
+from empleado;
+consultar el empleado que tenga el sueldo mayor al promedio 
+select idEmpleado,nombreEmpleado,salario
+from empleado where salario>(select avg(salario)
+from empleado);
+
+comsultar a que area pertenece un empleado 
+select idEmpleado,nombreEmpleado,idArea,nombreArea
+from empleado
+where idArea in (select idArea from area where nombreEmpleado='Juan')
+*/
+
 
 /*crear un prodecimiento para innactivar un cliente 
 otro para consultar los prodyuctos que a comprado un cliente 
