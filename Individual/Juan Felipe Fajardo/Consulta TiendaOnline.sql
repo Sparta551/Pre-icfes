@@ -29,6 +29,10 @@ from clientes c right join ventas v left join venta_producto vp on v.codigoVenta
 select * from ventas v inner join clientes c on c.codigoCliente=v.clienteFK;
 select * from ventas v left join clientes c on c.codigoCliente=v.clienteFK;
 
+describe Clientes;
+describe ventas;
+describe venta_producto;
+
 #consultar el cliente con mayor venta
 #consultar usuario y cliente de una venta especifica
 #consultar los productos que compro un cliente especifico
@@ -66,8 +70,39 @@ create view consultarCliente as select codigoCliente,nombreCliente, apellido fro
 
 select apellido from consultarCliente;
 
+
 #pocedimiento para inactivar un cliente
 #procedimiento para consultar los productos que ha comprado un cliente
 #procedimiento para modificar la fecha de nacimiento
 #crear vista que consulte que cliente compro un producto y su numero de orden
 #crear vista que muestre el cliente que mas compras haya hecho
+delimiter //
+create procedure eliminar_cliente (idCliente int)
+begin
+delete from cliente where codigoCLiente=idCliente;
+end//
+
+create procedure consultar_productos_cliente (idCliente int)
+begin
+select codigoCliente 'Id', nombreCLiente 'Nombre', productoFK 'Producto'
+from clientes c
+left join ventas v on c.codigoCliente=v.usuarioFK
+left join venta_producto vp on v.codigoVente=vp.ventaFK
+where codigoCliente=idCLiente;
+end//
+
+create procedure modificar_fechaNacimiento (idCliente int,nuevaFecha date)
+begin
+update clientes set nacimientoCliente=nuevaFecha where codigoCliente=idCLiente;
+end//
+
+delimiter ;
+
+drop view consltarProductoCliente;
+create view consltarProductoCliente as
+select codigoCliente 'Id', nombreCLiente 'Nombre', productoFK 'Producto', ventaFK 'Numero de orden'
+from clientes
+right join ventas on clientes.codigoCliente=ventas.usuarioFK
+left join venta_producto on ventas.codigoVenta=venta_producto.ventaFK;
+
+select * from consltarProductoCliente;
