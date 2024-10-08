@@ -1,18 +1,17 @@
 create database preIcfes;
-use preIcfes
+use preIcfes;
 
 create table usuario(
 idUsuario int primary key auto_increment,
 tipoDocUsuario varchar(5) not null,
 documentoUsuario int not null,
-nombreUsuario varchar(20) not null,
-apellidoUsuario varchar(20) not null,
+nombreUsuario varchar(100) not null,
 telefonoUsuario varchar(15) not null,
 emailUsuario varchar(40) not null,
 direccionUsuario varchar(30) not null,
 nivelEstudioUsuario varchar(20) not null,
 regionalUsuario varchar(10) not null,
-localidadUsuario varchar(10) not null
+localidadUsuario varchar(10) not null,
 estadoUsuario bool not null
 );
 
@@ -63,31 +62,39 @@ estadoDVenta varchar(10)
 );
 
 Alter table colegioDes
-add constrain Descripcion_Usuario
+add constraint Descripcion_Usuario
 foreign key (idUsuarioFK)
-reference usuario(idUsuario);
+references usuario(idUsuario);
 
 Alter table colegioDes
-add constrain Descripcion_Colegio
+add constraint Descripcion_Colegio
 foreign key (idColFK)
-reference colegio(idCol);
+references colegio(idCol);
 
 Alter table venta
-add constrain Venta_Usuario
+add constraint Venta_Usuario
 foreign key (idUsuarioFK)
-reference usuario(idUsuario);
+references usuario(idUsuario);
 
 Alter table venta
-add constrain Venta_Colegio
+add constraint Venta_Colegio
 foreign key (idColFK)
-reference colegio(idCol);
+references colegio(idCol);
 
 Alter table DVenta
-add constrain Detalle_Venta
+add constraint Detalle_Venta
 foreign key (idVentaFK)
-reference venta(idVenta);
+references venta(idVenta);
 
 Alter table DVenta
-add constrain Detalle_Producto
+add constraint Detalle_Producto
 foreign key (idProductoFK)
-reference producto(idProducto);
+references producto(idProducto);
+
+select * from colegio;
+select * from colegiodes;
+select * from dventa;
+select * from producto;
+select * from usuario;
+select * from venta;
+
