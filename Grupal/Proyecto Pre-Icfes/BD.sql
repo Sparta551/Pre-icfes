@@ -91,10 +91,74 @@ add constraint Detalle_Producto
 foreign key (idProductoFK)
 references producto(idProducto);
 
-select * from colegio;
-select * from colegiodes;
-select * from dventa;
-select * from producto;
-select * from usuario;
 select * from venta;
 
+select DANECol 'DANE', nombreCol 'Colegio', dificultadDes 'Dificultad', intencionDes 'Intencion', desvDes 'Desviacion',quienDecDes 'Nombre de contacto', contactoDes 'Telefono', fechaDes 'Fecha'
+from colegio inner join colegioDes on idCol=idColFK
+where idCol=5;
+
+select DANECol 'DANE', nombreCol 'Colegio', nombreUsuario 'Vendedor', totalVenta 'Total', fechaVenta 'fecha'
+from venta inner join colegio on idCol=idColFK
+inner join usuario on idUsuario=idUsuarioFK where totalVenta>=(select avg(totalVenta) from venta);
+
+select * from usuario where estadoUsuario=true;
+
+select * from producto where estadoProducto=true;
+
+select DANECol 'DANE', nombreCol 'Colegio', idVenta 'Id de Venta', fechaVenta 'Fecha de Venta', desvDes 'Desviacion'
+from colegio inner join venta on idCol=venta.idColFK
+inner join colegioDes on idCol=colegioDes.idColFK
+where nombreCol like '%bilingue%';
+
+select DANECol 'DANE', nombreCol 'Colegio', count(idVenta) 'Cantidad de ventas'
+from colegio inner join venta on idCol=idColFK
+group by nombreCol;
+
+/* Base del procedimiento de abajo
+create view Productos_2022 as
+select nombreProducto 'Producto', tipoProducto 'Tipo', precioProducto 'Precio' from producto where anioProducto=2022;*/
+
+delimiter //
+create procedure Crear_tabla_productos(anioPro year)
+begin
+set @sql =concat('create view Productos_',anioPro,' as
+select nombreProducto, tipoProducto, precioProducto from producto where anioProducto=',anioPro,';');
+prepare stmt from @sql;
+execute stmt;
+deallocate prepare stmt;
+end //
+
+create procedure Cambiar_estado_usuario(idUs int, nuevoEstado bool)
+begin
+update usuario set estadoUsuario=nuevoEstado where idUsuario=idUs;
+end //
+
+create procedure Cambiar_estado_producto(idPro int, nuevoEstado bool)
+begin
+update producto set estadoProducto=nuevoEstado where idProducto=idPro;
+end //
+
+create procedure Cambiar_localidad_usuario(idUs int, nuevaLocal varchar(10))
+begin
+update usuario set localidadUsuario=nuevaLocal where idUsuario=idUs;
+end //
+
+create procedure Cambiar_cantidadEstudiantes(idCo int, nuevaCantidad int)
+begin
+update colegio set cantidadEstudiantesCol=nuevaCantidad where idCol=idCo;
+end //
+
+create procedure Cambiar_estado_DVenta(idVenta int, idProducto int, nuevoEstado varchar(10))
+begin
+update DVenta set estadoDVenta=nuevoEstado where idVentaFK=idVenta and idProductoFK=idProducto;
+end //
+
+create procedure Eliminar_producto_venta(idPro int, idVen int)
+begin
+update Venta set totalVenta=totalVenta-(select sum(subtotalDVenta) from DVenta where idProductoFK=idPro and idVentaFK=idVen) where idVenta=idVen;
+delete from DVenta where idProductoFK=idPro and idVentaFK=idVen;
+end //
+delimiter ;
+
+
+#select * from Productos_2022;
