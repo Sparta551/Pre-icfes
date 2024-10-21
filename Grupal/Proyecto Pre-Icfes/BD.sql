@@ -158,6 +158,46 @@ begin
 update Venta set totalVenta=totalVenta-(select sum(subtotalDVenta) from DVenta where idProductoFK=idPro and idVentaFK=idVen) where idVenta=idVen;
 delete from DVenta where idProductoFK=idPro and idVentaFK=idVen;
 end //
+
+/*create trigger nombre_del_trigger
+(before / after)(insert | select | update | delete)
+on nombre_tabla
+for each row
+begin
+--instrucciones de sql
+end;
+variable old y new (acceder a registros)
+nwe: al nuevo valor que se va a insertar o modificar.
+old: el valor anterior 
+ 
+ ejemplo:
+create trigger validar_precio
+after insert on producto 
+for each row 
+begin 
+	if new.precio<o then 
+		signal sqlstate '45000'
+		set message_text='el precio es incorrecto';
+	end if ;
+end;
+
+create trigger registrar_cambio
+after update on empleado
+for each row 
+	begin into historial_cambios values(old.id , old.nombre , new.nombre, now())
+end;
+
+create trigger actualizar_inventario
+after update on venta
+for each row 
+	update inventario
+    set cantidad=cantidad-new.cantidad_vendida
+    where idProducto=new.idProducto;
+end;
+
+create trigger  regirstro_papelera
+before delete on 
+*/
 delimiter ;
 
 
