@@ -1,0 +1,325 @@
+/////////////////////////// Mongosh ///////////////////////////
+
+Crear la BD
+use /*NOMBRE DE LA BASE DE DATOS*/
+
+Verificar bd seleccionada
+db
+
+Crear colección
+db.createCollection("/*NOMBRE DE COLECCION*/")
+
+Mostrar bases de datos
+show dbs
+
+Mostrar Colecciones
+show collections
+
+Agregar un documento a la colección
+db./*NOMBRE DE COLECCION*/.insert({/*NOMBRE DEL CAMPO*/:/*INFO*/,/*NOMBRE DEL CAMPO*/:/*INFO*/})
+
+Agregar varios documentos a la colección band
+db.band.insert([
+{/*NOMBRE DEL CAMPO*/:/*INFO*/,/*NOMBRE DEL CAMPO*/:/*INFO*/},
+{/*NOMBRE DEL CAMPO*/:/*INFO*/,/*NOMBRE DEL CAMPO*/:/*INFO*/}
+])
+
+Ver todos los documentos insertados
+db./*NOMBRE DE COLECCION*/.find()
+
+Ver todos los documentos insertados con pretty
+db./*NOMBRE DE COLECCION*/.find().pretty()
+
+Ver todos los documentos insertados que cumplan con un criterio
+db./*NOMBRE DE COLECCION*/.find({/*CRITERIO*/})									/*Ejemplo de criterio: ({/*NOMBRE DEL DATO*/:/*INFO*/}*/
+
+Ver todos los documentos insertados con pretty que cumplan con un criterio
+db./*NOMBRE DE COLECCION/*.find({/*CRITERIO*/}).pretty()			
+
+Ver solo el primer documento insertado que cumpla con un criterio (findOne no admite pretty())
+db./*NOMBRE DE COLECCION*/.findOne({/*CRITERIO*/})				
+
+Ver todos los documentos insertados que cumplan con dos criterios
+db./*NOMBRE DE COLECCION*/.find({/*CRITERIO*/,/*CRITERIO*/}).pretty()		
+
+Ver campos específicos de documentos que cumplan con criterio especificado 
+(1 muestra el campo y 0 oculta el campo = /*ESTADO*/)
+db./*NOMBRE DE COLECCION*/.find({/*CRITERIO*/},{/*CAMPO*/:/*ESTADO*/,/*CAMPO*/:/*ESTADO*/})				
+
+Ver campos específicos de documentos que cumplan con criterio especificado, omitiendo id
+db./*NOMBRE DE COLECCION*/.find({/*CRITERIO*/},{/*CAMPO*/:/*ESTADO*/,/*CAMPO*/:/*ESTADO*/,'_id':0})
+
+Ordenar ascendentemente (1) descendentemente (-1)
+db./*NOMBRE DE COLECCION*/.find({/*CRITERIO*/}).sort({/*CAMPO*/:/*ORDEN*/}).pretty()				/*El 1 y -1 define si asciende o desciende (ORDEN)*/
+
+Actualizar documento en una colección 
+Cambia el país por USA en el primer documento cuyo nombre sea Bon Jovi
+db./*NOMBRE DE COLECCION*/.update({/*CRITERIO*/},{$set:{/*CAMPO*/:/*INFO*/}})
+
+Actualizar varios documentos de una colección (puede filtrar uno o varios documentos) 
+Actualiza todos los documentos en el campo country por USA
+db./*NOMBRE DE COLECCION*/.updateMany({},{$set:{/*CAMPO*/:/*INFO*/}})
+
+Verificar cambio
+db./*NOMBRE DE COLECCION*/.find({/*CAMPO*/:/*INFO*/}).sort({/*CAMPO*/:/*ORDEN*/}).pretty()
+
+Eliminar documento que cumpla con la condición
+db./*NOMBRE DE COLECCION*/.deleteOne({/*CRITERIO*/)})
+
+Borrar colección
+db./*NOMBRE DE COLECCION*/.drop()
+
+Borrar bd
+	Si no hay colecciones:
+	Verificar bd con 
+	db
+
+	Seleccionar bd si está en otra
+	use /*NOMBRE DE BASE DE DATOS*/
+
+	Borrar base seleccionada
+	db.dropDatabase()
+
+	show dbs para verificar
+
+$eq
+Matches values that are equal to a specified value.
+
+$gt
+Matches values that are greater than a specified value.
+
+$gte
+Matches values that are greater than or equal to a specified value.
+
+$in
+Matches any of the values specified in an array.
+
+$lt
+Matches values that are less than a specified value.
+
+$lte
+Matches values that are less than or equal to a specified value.
+
+$ne
+Matches all values that are not equal to a specified value.
+
+$nin
+Matches none of the values specified in an array.
+
+
+
+/////////////////////////// Visual Studio (Node js) ///////////////////////////
+
+1.	mkdir ejemplo /* ejemplo es el nombre del paquete*/
+2.	cd ejemplo
+3.	npm init -y
+4.	npm install express mongoose dotenv ejs nodemon path url
+5. 	Agregar el ("type": "module"),("start": "node server.js"),("dev": "nodemon server.js"), a 'package.json'
+
+
+Carpetas necesarias:
+
+config
+	database.js
+controller
+	/*nombre*/Controller.js
+model
+	/*nombre*/Model.js
+node_modules
+public
+	css
+	js
+routes
+	/*nombre*/Routes.js
+util
+	__dirname.js
+views
+	index.ejs
+.env
+package-lock.json
+package.json
+server.js
+
+------------------database.js------------------
+
+import {connect} from "mongoose"
+import {config} from "dotenv"
+
+config()
+
+export const connectDB = async() => {
+    try{
+        const /*coneccion*/ = await connect(`mongodb://${process.env./*host del mongo "localhost"*/}:${process.env./*puerto del mongo*/}/${process.env./*nombre del mongo*/}`);
+        return /*coneccion*/;
+    } catch (err){
+        throw Error("Error: " + error.message)
+    }
+}
+
+------------------controladores------------------
+
+import { /*nombre de modelo*/ } from "/*direccion*/";				//direccion empieza "../"
+
+//Consulta
+export const /*nombre de funcion 1*/ = async (peticion, respuesta) => {
+    try {
+        let /*variable 1*/ = await /*nombre de modelo*/.find()
+        respuesta.status(/*status*/).send(/*variable 1*/)		//status 200 = OK/exito
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//Poner datos
+export const /*nombre de funcion 2*/ = async (peticion, respuesta) => {
+    try {
+        let /*variable 2*/ = peticion.body
+        // Guardar datos
+        await /*nombre de modelo*/.create(/*variable 2*/)
+        // devuelve la vista al usuario para vea los nuevos datos
+        let /*variable 3*/ = await /*nombre de modelo*/.find()
+        respuesta.status(/*status*/).send(/*variable 3*/)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//Actualizar datos
+export const /*nombre de funcion 3*/ = async (peticion, respuesta) => {
+    try {
+        const {/*campo de requisito*/} = peticion.params;
+        const {/*campo/s a cambiar*/} = peticion.body;
+        let /*variable 4*/ = await /*nombre de modelo*/.findByIdAndUpdate(/*campo de requisito*/,
+            {$set:{/*campo/s a cambiar*/}},					//separar los campos con una ,
+            {new:true}
+        );
+        if (!/*variable 4*/) {
+            return respuesta.status(/*status 2*/).json({ success: false, mensaje: /*Mensaje de que no encontro el campo*/ });	//status 404 = no encontrado
+        }
+
+        respuesta.status(/*status*/).json({ success: true, detalle: /*variable 4*/ });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+//Eliminar una entrada
+export const /*nombre de funcion 4*/ = async (peticion, respuesta) => {
+    try {
+        const {/*campo de requisito 2*/} = peticion.params;
+
+        let /*variable 5*/ = await /*nombre de modelo*/.findByIdAndRemove(/*campo de requisito 2*/);
+   
+        if (!/*variable 5*/) {
+            return respuesta.status(/*status 2*/).json({ success: false, mensaje: /*Mensaje de que no encontro el campo*/ });	
+        }
+
+        respuesta.status(/*status*/).json({ success: true, detalle: /*mensaje de entrada eliminada*/ });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+------------------modelos------------------
+
+import mongoose, { Schema } from "mongoose";
+
+const /*nombre del Schema*/ = new Schema({
+    /*nombre del campo*/: /*tipo de dato*/,
+    /*nombre del campo*/: /*tipo de dato*/
+})
+
+export const /*nombre de variable del modelo*/ = new mongoose.model('/*nombre de modelo*/', /*nombre del Schema*/)
+
+------------------routes------------------
+
+import { Router } from "express";
+import { crearDatos, obtenerDatos } from "../controller/productoController.js";
+const router = Router()
+
+//funciones:
+router./*tipo de funcion*/('/*nombre de variable del let*/', /*nombre de funcion*/)
+
+//get=consulta, post=ingresar entrada, delete=eliminar, put=actualizar (tipo de funcion)
+
+export default router;
+
+------------------__dirname.js------------------
+
+import { fileURLToPath } from "url";
+import path, { join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+//Configuración de directorio raiz carptea SRC
+const __dirname = path.dirname(join(__filename,"../")); 
+
+export { __dirname };
+
+------------------index.ejs------------------
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <table border="1" id="table">
+      <thead>
+        <tr>
+          <th><!--Nombres de titulos en la vista--></th>
+          <th><!--Nombres de titulos en la vista--></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% usuarios.forEach(function(usuario){ %>
+        <tr>
+          <td><%= <!--de que coleccion sale-->.<!--nombre del campo--> %></td>
+          <td><%= <!--de que coleccion sale-->.<!--nombre del campo--> %></td>
+        </tr>
+        <% })%>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+------------------server.js------------------
+
+import { config } from "dotenv"
+import express, {json} from "express"
+import path from "path"
+
+import { __dirname } from "./util/__dirname.js"
+import { connectDatabase } from "./config/database.js"
+import /*nombre de routes*/ from "/*direccion de routes*/"
+config()
+
+// Conexión Base de Datos
+connectDatabase()
+    .then(() => {
+        console.log(/*Mensaje de conexion exitosa*/)
+    })
+    .catch((error) => {
+        console.error(/*Mensaje de error al conectarse*/, error)
+        process.exit(1)
+    });
+
+// Configuración del servidor
+const server = express()
+const PORT = process.env.PORT
+server.use(express.urlencoded({ extended: true }));
+server.use(express.static('public'));
+
+// Configuración del motor de plantillas
+server.set('view engine', 'ejs');
+server.set('views', path.join(__dirname, 'views'));
+server.use(json())
+
+// Configuración Rutas
+server.use(/*nombre de routes*/)
+
+
+server.listen(PORT, () => console.log(`Server runinn in port ${PORT}`))
