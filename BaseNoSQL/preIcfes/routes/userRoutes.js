@@ -2,8 +2,8 @@ import { Router } from "express";
 import {obtenerTodosLosUsuarios,obtenerUsuarioPorId,agregarNuevoUsuario} from "../controller/userController.js";
 const router = Router()
 
-router.get('/Users', obtenerTodosLosUsuarios)
-router.get('/Users', obtenerUsuarioPorId)
-router.post('/Users', agregarNuevoUsuario)
+router.get('/user', obtenerTodosLosUsuarios)
+router.get('/user.id', obtenerUsuarioPorId)
+router.post('/user', agregarNuevoUsuario)
 
 export default router;

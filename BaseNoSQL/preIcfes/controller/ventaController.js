@@ -21,9 +21,6 @@ export const obtenerVentaPorId = async (peticion, respuesta) => {
         const { id } = peticion.params;
         let venta = await ventaModel.findById(id).populate('idColFK').populate('idUsuarioFK');
 
-        if (!venta) {
-            return respuesta.status(404).render("ventas/no_encontrada");
-        }
 
         respuesta.status(200).render("ventas/detalle", { venta });
     } catch (error) {
@@ -36,11 +33,9 @@ export const obtenerVentaPorId = async (peticion, respuesta) => {
  */
 export const agregarNuevaVenta = async (peticion, respuesta) => {
     try {
-        const { idColFK, idUsuarioFK, totalVenta, fechaVenta } = peticion.body;
+        const {totalVenta, fechaVenta } = peticion.body;
 
         const nuevaVenta = new ventaModel({
-            idColFK: idColFK,
-            idUsuarioFK: idUsuarioFK,
             totalVenta: totalVenta,
             fechaVenta: fechaVenta || new Date()
         });

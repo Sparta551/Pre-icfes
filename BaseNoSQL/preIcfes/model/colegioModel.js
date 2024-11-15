@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 const colegioSchema = new Schema({
-    idCol: String,
     DANECol: Number,
     nombreCol: String,
     nivelAcademicoCol: String,

@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema({
-    idUsuario: String,
     tipoDocUsuario: String,
     documentoUsuario: Number,
     nombreUsuario: String,
@@ -14,4 +13,4 @@ const userSchema = new Schema({
     estadoUsuario: Boolean
 });
 
-export const userModel = new mongoose.model('Users', userSchema)
+export const userModel = new mongoose.model('user', userSchema)

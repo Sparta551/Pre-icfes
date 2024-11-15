@@ -23,9 +23,6 @@ export const obtenerProductoPorId = async (peticion, respuesta) => {
         const { id } = peticion.params;
         let producto = await productoModel.findById(id);
 
-        if (!producto) {
-            return respuesta.status(404).render("productos/no_encontrado");
-        }
 
         respuesta.status(200).render("productos/detalle", { producto });
     } catch (error) {
@@ -42,7 +39,6 @@ export const agregarNuevoProducto = async (peticion, respuesta) => {
 
         // Crear un objeto con los datos del nuevo producto
         const nuevoProducto = new productoModel({
-            idProducto: Date.now().toString(), // Asignar un ID único basado en el tiempo actual
             tipoProducto: tipo,
             nombreProducto: nombre,
             precioProducto: precio,

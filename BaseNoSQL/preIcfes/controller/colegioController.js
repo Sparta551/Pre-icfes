@@ -21,9 +21,6 @@ export const obtenerColegioPorId = async (peticion, respuesta) => {
         const { id } = peticion.params;
         let colegio = await colegioModel.findById(id).populate('idColFK');
 
-        if (!colegio) {
-            return respuesta.status(404).render("colegios/no_encontrado");
-        }
 
         respuesta.status(200).render("colegios/detalle", { colegio });
     } catch (error) {
@@ -40,7 +37,6 @@ export const agregarNuevoColegio = async (peticion, respuesta) => {
 
         // Crear un objeto con los datos del nuevo colegio
         const nuevoColegio = new colegioModel({
-            idCol: Date.now().toString(), // Asignar un ID único basado en el tiempo actual
             DANECol: 0, // Asumiendo que no se proporciona este dato en la petición
             nombreCol: nombre,
             nivelAcademicoCol: "", // Asumiendo que no se proporciona este dato en la petición
