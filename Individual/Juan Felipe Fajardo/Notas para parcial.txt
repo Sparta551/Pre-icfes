@@ -164,7 +164,7 @@ import { /*nombre de modelo*/ } from "/*direccion*/";				//direccion empieza "..
 export const /*nombre de funcion 1*/ = async (peticion, respuesta) => {
     try {
         let /*variable 1*/ = await /*nombre de modelo*/.find()
-        respuesta.status(/*status*/).render("index", { /*variable 1*/ })		//status 200 = OK/exito
+        respuesta.status(/*status*/).send(/*variable 1*/)		//status 200 = OK/exito
     } catch (error) {
         console.log(error);
     }
@@ -178,7 +178,7 @@ export const /*nombre de funcion 2*/ = async (peticion, respuesta) => {
         await /*nombre de modelo*/.create(/*variable 2*/)
         // devuelve la vista al usuario para vea los nuevos datos
         let /*variable 3*/ = await /*nombre de modelo*/.find()
-        respuesta.status(/*status*/).render("index", {/*variable 3*/})
+        respuesta.status(/*status*/).send(/*variable 3*/)
     } catch (error) {
         console.log(error);
     }
