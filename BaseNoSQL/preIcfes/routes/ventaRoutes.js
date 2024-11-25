@@ -1,9 +1,10 @@
 import { Router } from "express";
-import {obtenerVentas,obtenerVentaPorId,agregarNuevaVenta} from "../controller/ventaController.js";
+import {obtenerTodasLasVentas,obtenerVentaPorId,agregarNuevaVenta,calcularTotalVenta} from "../controller/ventaController.js";
 const router = Router()
 
-router.get('/Venta', obtenerVentas)
-router.get('/Venta/:id', obtenerVentaPorId)
-router.post('/Venta', agregarNuevaVenta)
+router.post('/ventas', agregarNuevaVenta);
+router.get('/ventas', obtenerTodasLasVentas);
+router.get('/ventas/:id', obtenerVentaPorId);
+router.get('/ventas/total', calcularTotalVenta);
 
 export default router;

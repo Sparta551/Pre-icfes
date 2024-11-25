@@ -2,14 +2,33 @@ import { ventaModel } from "../model/ventaModel.js";
 
 
 /**
- * Obtener todas las ventas
+ * Agregar una nueva venta
  */
-export const obtenerVentas = async (peticion, respuesta) => {
+export const agregarNuevaVenta = async (peticion, respuesta) => {
     try {
-        let ventas = await ventaModel.find().populate('idColFK').populate('idUsuarioFK');
-        respuesta.status(200).render("ventas/index", { ventas });
+        const data = peticion.body;
+
+        const nuevaVenta = new ventaModel(data);
+        await nuevaVenta.save();
+
+        respuesta.status(201).send(nuevaVenta);
     } catch (error) {
         console.log(error);
+        respuesta.status(500).json({ mensaje: 'Hubo un error al agregar la venta.' });
+    }
+};
+
+/**
+ * Obtener todas las ventas
+ */
+export const obtenerTodasLasVentas = async (peticion, respuesta) => {
+    try {
+        const ventas = await ventaModel.find();
+        
+        respuesta.status(200).json(ventas);
+    } catch (error) {
+        console.log(error);
+        respuesta.status(500).json({ mensaje: 'Hubo un error al obtener las ventas.' });
     }
 };
 
@@ -19,32 +38,13 @@ export const obtenerVentas = async (peticion, respuesta) => {
 export const obtenerVentaPorId = async (peticion, respuesta) => {
     try {
         const { id } = peticion.params;
-        let venta = await ventaModel.findById(id).populate('idColFK').populate('idUsuarioFK');
 
+        const venta = await ventaModel.findById(id);
 
-        respuesta.status(200).render("ventas/detalle", { venta });
+        respuesta.status(200).json(venta);
     } catch (error) {
         console.log(error);
-    }
-};
-
-/**
- * Agregar una nueva venta
- */
-export const agregarNuevaVenta = async (peticion, respuesta) => {
-    try {
-        const {totalVenta, fechaVenta } = peticion.body;
-
-        const nuevaVenta = new ventaModel({
-            totalVenta: totalVenta,
-            fechaVenta: fechaVenta || new Date()
-        });
-
-        await nuevaVenta.save();
-        respuesta.status(201).json({ message: "Venta agregada con éxito", venta: nuevaVenta });
-    } catch (error) {
-        console.log(error);
-        respuesta.status(500).json({ error: "Error al agregar la venta" });
+        respuesta.status(500).json({ mensaje: 'Hubo un error al obtener la venta.' });
     }
 };
 

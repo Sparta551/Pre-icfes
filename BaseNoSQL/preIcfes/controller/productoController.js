@@ -1,17 +1,33 @@
 import { productoModel } from "../model/productoModel.js";
 
 /**
+ * Agregar un nuevo producto
+ */
+export const agregarNuevoProducto = async (peticion, respuesta) => {
+    try {
+        const data = peticion.body;
+
+        const nuevoProducto = new productoModel(data);
+        await nuevoProducto.save();
+
+        respuesta.status(201).send(nuevoProducto);
+    } catch (error) {
+        console.log(error);
+        respuesta.status(500).json({ mensaje: 'Hubo un error al agregar el producto.' });
+    }
+};
+
+/**
  * Obtener todos los productos
  */
 export const obtenerTodosLosProductos = async (peticion, respuesta) => {
     try {
-        let productos = await productoModel.find({
-            precio: { $gt: 100 } // Filtrar productos cuyo precio sea mayor a 100
-        }).sort({ precio: -1 }); // Ordenar por precio en orden descendente
-
-        respuesta.status(200).render("productos/index", { productos });
+        const productos = await productoModel.find();
+        
+        respuesta.status(200).json(productos);
     } catch (error) {
         console.log(error);
+        respuesta.status(500).json({ mensaje: 'Hubo un error al obtener los productos.' });
     }
 };
 
@@ -21,37 +37,11 @@ export const obtenerTodosLosProductos = async (peticion, respuesta) => {
 export const obtenerProductoPorId = async (peticion, respuesta) => {
     try {
         const { id } = peticion.params;
-        let producto = await productoModel.findById(id);
 
-
-        respuesta.status(200).render("productos/detalle", { producto });
+        const producto = await productoModel.findById(id);
+        respuesta.status(200).json(producto);
     } catch (error) {
         console.log(error);
-    }
-};
-
-/**
- * Agregar un nuevo producto
- */
-export const agregarNuevoProducto = async (peticion, respuesta) => {
-    try {
-        const { nombre, tipo, precio } = peticion.body;
-
-        // Crear un objeto con los datos del nuevo producto
-        const nuevoProducto = new productoModel({
-            tipoProducto: tipo,
-            nombreProducto: nombre,
-            precioProducto: precio,
-            anioProducto: null, // Asumiendo que no se proporciona este dato en la petición
-            estadoProducto: true // Asumiendo que el nuevo producto está activo por defecto
-        });
-
-        // Guardar el nuevo producto en la base de datos
-        await nuevoProducto.save();
-
-        respuesta.status(201).redirect("/productos");
-    } catch (error) {
-        console.error('Error al agregar nuevo producto:', error);
-        respuesta.status(500).json({ success: false, mensaje: 'Error interno del servidor' });
+        respuesta.status(500).json({ mensaje: 'Hubo un error al obtener el producto.' });
     }
 };

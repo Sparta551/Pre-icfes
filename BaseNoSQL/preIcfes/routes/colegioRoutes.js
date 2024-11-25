@@ -1,9 +1,10 @@
 import { Router } from "express";
-import {obtenerTodosLosColegios,obtenerColegioPorId,obtenerColegiosPorNombre} from "../controller/collegeController.js";
+import {obtenerTodosLosColegios,obtenerColegioPorId,agregarNuevoColegio} from "../controller/colegioController.js";
+
 const router = Router()
 
 router.get('/colegios', obtenerTodosLosColegios)
-router.post('/colegios', obtenerColegioPorId)
-router.post('/colegios', obtenerColegiosPorNombre)
+router.get('/colegios/:DANEcol', obtenerColegioPorId)
+router.post('/colegios', agregarNuevoColegio)
 
 export default router;

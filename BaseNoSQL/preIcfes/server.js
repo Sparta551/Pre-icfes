@@ -4,7 +4,12 @@ import path from "path"
 
 import { __dirname } from "./util/__dirname.js"
 import { connectDatabase } from "./config/database.js"
+
 import userRoutes from "./routes/userRoutes.js"
+import productoRoutes from "./routes/productoRoutes.js"
+import colegioRoutes from "./routes/colegioRoutes.js"
+import ventaRoutes from "./routes/ventaRoutes.js"
+
 config()
 
 // Conexión Base de Datos
@@ -26,10 +31,13 @@ server.use(express.static('public'));
 // Configuración del motor de plantillas
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, 'views'));
-server.use(json())
+server.use(json());
 
 // Configuración Rutas
 server.use(userRoutes)
+server.use(colegioRoutes)
+server.use(productoRoutes)
+server.use(ventaRoutes)
 
 
 server.listen(PORT, () => console.log(`Server runinn in port ${PORT}`))
