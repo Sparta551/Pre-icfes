@@ -47,4 +47,19 @@ export const obtenerColegioPorId = async (peticion, respuesta) => {
     }
 };
 
+/**
+ * Eliminar un colegio por DANE
+ */
+export const eliminarColegioPorDane = async (peticion, respuesta) => {
+    try {
+        const { data } = peticion.params;
+
+        const elimina = await colegioModel.deleteOne({ DANEcol: data });
+        respuesta.status(200).json(elimina);
+
+    } catch (error) {
+        console.error(error);
+        respuesta.status(500).json({ message: 'Ocurrió un error al eliminar el colegio' });
+    }
+};
 

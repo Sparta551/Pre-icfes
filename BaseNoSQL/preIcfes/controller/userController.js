@@ -32,17 +32,18 @@ export const obtenerTodosLosUsuarios = async (peticion, respuesta) => {
 };
 
 /**
- * Obtener un usuario por ID
+ * Desactivar un usuario por ID
  */
-export const obtenerUsuarioPorId = async (peticion, respuesta) => {
+export const desactivarUsuario = async (peticion, respuesta) => {
     try {
         const { id } = peticion.params;
 
-        const usuario = await userModel.findById(id);
+        const result = await userModel.findOneAndUpdate({ _id: id }, { $set: { estadoUsuario: 0 } }, { new: true });
 
-        respuesta.status(200).json(usuario);
+        respuesta.status(200).json(result);
+
     } catch (error) {
-        console.log(error);
-        respuesta.status(500).json({ mensaje: 'Hubo un error al obtener el usuario.' });
+        console.error(error);
+        respuesta.status(500).json({ message: 'Ocurrió un error al actualizar el estado del producto' });
     }
 };
