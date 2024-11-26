@@ -1,0 +1,41 @@
+use preIcfes
+db.createCollection("Colegio")
+db.createCollection("Producto")
+db.createCollection("Usuario")
+db.createCollection("Venta")
+db.Colegio.insertMany([
+{DANECol: 2147483647, nombreCol: "INSTITUTO EDUCATIVO NISSI", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 187},
+{DANECol: 2147483647, nombreCol: "COLEGIO PERSONITAS DEL FUTURO", nivelAcademicoCol: "5", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 47},
+{DANECol: 2147483647, nombreCol: "CENTRO EDUCATIVO CORAZON DE JE", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 73},
+{DANECol: 2147483647, nombreCol: "C.E. SAN ANTONIO", nivelAcademicoCol: "6", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 775},
+{DANECol: 2147483647, nombreCol: "'C.E. KIDS GARDEN SCHOOL", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 84},
+{DANECol: 2147483647, nombreCol: "CENTRO EDUCATIVO SHALON", nivelAcademicoCol: "3", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 183}
+])
+db.Producto.insertMany([
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 1", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 2", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 3", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 4", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 5", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 6", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1}
+])
+db.Usuario.insertMany([
+{tipoDocUsuario: "CC", documentoUsuario: 1007206764, nombreUsuario: "DANIELA NOHELIA DUARTE ZAPATA", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "KR 82 23 B 73", nivelEstudioUsuario: "TÉCNICO", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1},
+{tipoDocUsuario: "CC", documentoUsuario: 1007272379, nombreUsuario: "GLORIA LISETH ROA MONTAÑEZ", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 92 56 78", nivelEstudioUsuario: "PROFESIONAL", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1},
+{tipoDocUsuario: "CC", documentoUsuario: 1121923810, nombreUsuario: "JULIETH XILENA PUERTAS CASTELLANO", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "KR 66 35 21", nivelEstudioUsuario: "TÉCNICO", regionalUsuario: "Bogotá", localidadUsuario: "Chapinero", estadoUsuario: 1},
+{tipoDocUsuario: "CC", documentoUsuario: 1094270326, nombreUsuario: "LILIANA   CARREÑO MEDINA", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "KR 42 S 50 82", nivelEstudioUsuario: "PROFESIONAL", regionalUsuario: "Bogotá", localidadUsuario: "Barrios Un", estadoUsuario: 1},
+{tipoDocUsuario: "CC", documentoUsuario: 1096207880, nombreUsuario: "YINETH   GORDON VERGEL", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 20 24 A 25", nivelEstudioUsuario: "BACHILLER", regionalUsuario: "Bogotá", localidadUsuario: "Chapinero", estadoUsuario: 1},
+{tipoDocUsuario: "CC", documentoUsuario: 1102354909, nombreUsuario: "YENNY MARCELA SANCHEZ", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 36 35 39", nivelEstudioUsuario: "PROFESIONAL", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1}
+])
+db.Venta.insertMany([
+{totalVenta: 225000, fechaVenta: "0000-00-00"},
+{totalVenta: 168000, fechaVenta: "0000-00-00"},
+{totalVenta: 16800000, fechaVenta: "0000-00-00"},
+{totalVenta: 17662000, fechaVenta: "0000-00-00"},
+{totalVenta: 159000, fechaVenta: "0000-00-00"},
+{totalVenta: 303000, fechaVenta: "0000-00-00"}
+])
+db.Colegio.find()
+db.Producto.find()
+db.Usuario.find()
+db.Venta.find()
