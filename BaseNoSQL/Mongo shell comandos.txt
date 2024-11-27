@@ -1,24 +1,32 @@
 use preIcfes
+
 db.createCollection("Colegio")
 db.createCollection("Producto")
 db.createCollection("Usuario")
 db.createCollection("Venta")
-db.Colegio.insertMany([
-{DANECol: 2147483647, nombreCol: "INSTITUTO EDUCATIVO NISSI", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 187},
-{DANECol: 2147483647, nombreCol: "COLEGIO PERSONITAS DEL FUTURO", nivelAcademicoCol: "5", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 47},
-{DANECol: 2147483647, nombreCol: "CENTRO EDUCATIVO CORAZON DE JE", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 73},
-{DANECol: 2147483647, nombreCol: "C.E. SAN ANTONIO", nivelAcademicoCol: "6", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 775},
-{DANECol: 2147483647, nombreCol: "'C.E. KIDS GARDEN SCHOOL", nivelAcademicoCol: "4", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 84},
-{DANECol: 2147483647, nombreCol: "CENTRO EDUCATIVO SHALON", nivelAcademicoCol: "3", estratoSocioeconoCol: 0, cantidadEstudiantesCol: 183}
+
+db.Colegio.insertMany([{DANEcol: 313001029922, nombreCol: "INSTITUTO EDUCATIVO NISSI", nivelAcademicoCol: "C", estratoSocioeconomico: 4, cantidadEstudiantesCol: 187},
+{DANEcol: 347001051415,nombreCol: "COLEGIO PERSONITAS DEL FUTURO", nivelAcademicoCol: "B", estratoSocioeconomico: 5, cantidadEstudiantesCol: 47},
+{DANEcol: 252835006246,nombreCol: "CE. VALLENATO", nivelAcademicoCol: "C", estratoSocioeconomico: 3, cantidadEstudiantesCol: 519},
+{DANEcol: 308638001084,nombreCol: "CENTRO EDUCATIVO CORAZON DE JESUS", nivelAcademicoCol: "B", estratoSocioeconomico: 4, cantidadEstudiantesCol: 73},
+{DANEcol: 220400008795,nombreCol: "C.E. SAN ANTONIO", nivelAcademicoCol: "A+", estratoSocioeconomico: 6, cantidadEstudiantesCol: 775},
+{DANEcol: 308758078820,nombreCol: "C.E. KIDS GARDEN SCHOOL", nivelAcademicoCol: "A", estratoSocioeconomico: 4,cantidadEstudiantesCol: 84},
+{DANEcol: 308758078552,nombreCol: "CENTRO EDUCATIVO SHALON", nivelAcademicoCol: "B", estratoSocioeconomico: 3, cantidadEstudiantesCol: 183},
+{DANEcol: 366001007119,nombreCol: "COLEGIO BÁSICO MONTELÁBANO", nivelAcademicoCol: "A", estratoSocioeconomico: 4, cantidadEstudiantesCol: 196},
+{DANEcol: 313001029931,nombreCol: "COLEGIO MANOS CREATIVAS", nivelAcademicoCol: "C", estratoSocioeconomico: 3, cantidadEstudiantesCol: 115},
+{DANEcol: 325260000655,nombreCol: "COLEGIO SAN JERONIMO", nivelAcademicoCol: "C", estratoSocioeconomico: 2, cantidadEstudiantesCol: 112}
 ])
-db.Producto.insertMany([
-{tipoProducto: "MP", nombreProducto: "Martes de prueba 1", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
+
+db.Producto.insertMany ([{tipoProducto: "MP", nombreProducto: "Martes de prueba 1", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
 {tipoProducto: "MP", nombreProducto: "Martes de prueba 2", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
 {tipoProducto: "MP", nombreProducto: "Martes de prueba 3", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
 {tipoProducto: "MP", nombreProducto: "Martes de prueba 4", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
-{tipoProducto: "MP", nombreProducto: "Martes de prueba 5", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1},
-{tipoProducto: "MP", nombreProducto: "Martes de prueba 6", precioProducto: 3000, anioProducto: 2024, estadoProducto: 1}
+{tipoProducto: "MP", nombreProducto: "Martes de prueba 1", precioProducto: 3000, anioProducto: 2023, estadoProducto: 0},
+{tipoProducto: "Pensar", nombreProducto: "Pensar 1", precioProducto: 10000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "Pensar", nombreProducto: "Pensar 2", precioProducto: 10000, anioProducto: 2024, estadoProducto: 1},
+{tipoProducto: "Pre-Icfes", nombreProducto: "Curso Preicfes", precioProducto: 700000, anioProducto: 2024, estadoProducto: 1}
 ])
+
 db.Usuario.insertMany([
 {tipoDocUsuario: "CC", documentoUsuario: 1007206764, nombreUsuario: "DANIELA NOHELIA DUARTE ZAPATA", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "KR 82 23 B 73", nivelEstudioUsuario: "TÉCNICO", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1},
 {tipoDocUsuario: "CC", documentoUsuario: 1007272379, nombreUsuario: "GLORIA LISETH ROA MONTAÑEZ", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 92 56 78", nivelEstudioUsuario: "PROFESIONAL", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1},
@@ -27,15 +35,33 @@ db.Usuario.insertMany([
 {tipoDocUsuario: "CC", documentoUsuario: 1096207880, nombreUsuario: "YINETH   GORDON VERGEL", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 20 24 A 25", nivelEstudioUsuario: "BACHILLER", regionalUsuario: "Bogotá", localidadUsuario: "Chapinero", estadoUsuario: 1},
 {tipoDocUsuario: "CC", documentoUsuario: 1102354909, nombreUsuario: "YENNY MARCELA SANCHEZ", telefonoUsuario: "8892028", emailUsuario: "ecaaas@gmail.com", direccionUsuario: "CL 36 35 39", nivelEstudioUsuario: "PROFESIONAL", regionalUsuario: "Bogotá", localidadUsuario: "Ciudad Bol", estadoUsuario: 1}
 ])
+
 db.Venta.insertMany([
-{totalVenta: 225000, fechaVenta: "0000-00-00"},
-{totalVenta: 168000, fechaVenta: "0000-00-00"},
-{totalVenta: 16800000, fechaVenta: "0000-00-00"},
-{totalVenta: 17662000, fechaVenta: "0000-00-00"},
-{totalVenta: 159000, fechaVenta: "0000-00-00"},
-{totalVenta: 303000, fechaVenta: "0000-00-00"}
+{totalVenta: 225000, fechaVenta: "2024-12-05"},
+{totalVenta: 168000, fechaVenta: "2023-04-24"},
+{totalVenta: 16800000, fechaVenta: "2024-06-30"},
+{totalVenta: 17662000, fechaVenta: "2024-08-27"},
+{totalVenta: 159000, fechaVenta: "2023-10-09"},
+{totalVenta: 303000, fechaVenta: "2024-05-10"},
+{totalVenta: 16800000, fechaVenta: "2024-08-30"},
+{totalVenta: 17662000, fechaVenta: "2024-07-21"},
+{totalVenta: 159000, fechaVenta: "2023-11-09"},
+{totalVenta: 303000, fechaVenta: "2024-02-10"}
 ])
+
 db.Colegio.find()
+db.Colegio.findOne({DANEcol:252835006246})
+db.Colegio.findOneAndDelete({DANEcol:252835006246})
+
 db.Producto.find()
+db.Producto.find({"_id": ObjectId("67467703e569f4c42b67aef3")})
+db.Producto.findOneAndUpdate({"_id": ObjectId("67467846e569f4c42b67aefb")},{$set: {estadoProducto: 0}})
+db.Producto.findOneAndUpdate({"tipoProducto": "MP"}, {$set: {precioProducto: 4000}})
+
 db.Usuario.find()
+db.Usuario.find({"_id": ObjectId('67467867e569f4c42b67af03')})
+db.Usuario.find({regionalUsuario: "Bogotá"})
+db.Producto.findOneAndUpdate({"_id": ObjectId("67467867e569f4c42b67af03")},{$set: {estadoUsuario: 0}})
+
 db.Venta.find()
+db.Venta.find({totalVenta: {$gt: 120000}})

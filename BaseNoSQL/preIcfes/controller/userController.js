@@ -31,6 +31,7 @@ export const obtenerTodosLosUsuarios = async (peticion, respuesta) => {
     }
 };
 
+
 /**
  * Desactivar un usuario por ID
  */
@@ -39,6 +40,21 @@ export const desactivarUsuario = async (peticion, respuesta) => {
         const { id } = peticion.params;
 
         const result = await userModel.findOneAndUpdate({ _id: id }, { $set: { estadoUsuario: 0 } }, { new: true });
+
+        respuesta.status(200).json(result);
+
+    } catch (error) {
+        console.error(error);
+        respuesta.status(500).json({ message: 'Ocurrió un error al actualizar el estado del producto' });
+    }
+};
+
+
+export const buscarUsuarioRegional = async (peticion, respuesta) => {
+    try {
+        const { regional } = peticion.params;
+
+        const result = await userModel.find({regionalUsuario: regional});
 
         respuesta.status(200).json(result);
 
